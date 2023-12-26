@@ -48,7 +48,7 @@ function createProject() {
       startDate:startDate.value,
       endDate:endDate.value
     }
-    axios.post(`http://localhost:8090/api/project`, 
+    axios.post(`http://localhost:8088/api/project`, 
     requestProject,
     {
       headers: { 

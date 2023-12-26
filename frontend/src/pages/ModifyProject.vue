@@ -50,7 +50,7 @@ function modifyProject() {
     startDate:startDate.value,
     endDate:endDate.value
   }
-  axios.put(`http://localhost:8090/api/project/` + projectId, 
+  axios.put(`http://localhost:8088/api/project/` + projectId, 
   requestProject,
   {
     headers: { 
@@ -80,7 +80,7 @@ function modifyProject() {
   });
 }
 function loadData() {
-  axios.get(`http://localhost:8090/api/project/` + projectId, 
+  axios.get(`http://localhost:8088/api/project/` + projectId, 
     {
       headers: { 
           "Authorization" : sessionStorage.getItem("access-token") 
