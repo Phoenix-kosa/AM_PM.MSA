@@ -29,7 +29,7 @@ function go(projectId) {
 }
 
 function loadData() {
-  axios.get(`http://localhost:8090/api/project`, {
+  axios.get(`http://localhost:8088/api/project`, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }

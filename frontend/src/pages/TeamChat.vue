@@ -84,7 +84,7 @@ function decodeToken(token) {
 }
 
 function show(userId) {
-  axios.get('http://localhost:8090/api/user/' + userId, {
+  axios.get('http://localhost:8088/api/user/' + userId, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }
@@ -114,7 +114,7 @@ function close() {
 const decodedPayload = decodeToken(sessionStorage.getItem("access-token"));
 userId.value = decodedPayload.id;
 
-let websocket = new WebSocket('ws://localhost:8090/api/chat');
+let websocket = new WebSocket('ws://localhost:8088/api/chat');
 let stomp = Stomp.over(websocket);
 stomp.connect({}, function() {
   stomp.subscribe("/sub/load/" + projectId, function(chat) {

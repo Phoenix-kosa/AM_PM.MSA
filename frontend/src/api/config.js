@@ -1,14 +1,14 @@
 import axios from "axios";
 
 const apiConfig = {
-  baseURL: "http://localhost:8090/",
+  baseURL: "http://localhost:8088/",
   headers: {
     "Content-Type": "application/json",
   },
 };
 
 const apiFileConfig = {
-  baseURL: "http://localhost:8090/",
+  baseURL: "http://localhost:8088/",
   headers: {
     "Content-Type": "multipart/form-data",
     accept: "application/json",
@@ -39,7 +39,7 @@ export const expireToken = async (err, retryFunction, data) => {
   if (err.response.status === 401) {
     console.log("토큰 만료");
     try {
-      const response = await axios.get("http://localhost:8090/api/rtoken", {
+      const response = await axios.get("http://localhost:8088/api/rtoken", {
         headers: {
           RefreshToken: sessionStorage.getItem("refresh-token"),
           Authorization: sessionStorage.getItem("access-token"),

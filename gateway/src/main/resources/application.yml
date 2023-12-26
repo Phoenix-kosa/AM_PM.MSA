@@ -10,7 +10,7 @@ spring:
         - id: mainservice
           uri: http://localhost:8001
           predicates:
-            - Path=/api/user/**, /api/auth/**, /api/profile_img, /api/chat, /api/members/**, /api/representative_member/**, /api/project/**
+            - Path=/api/user, /api/user/**, /api/auth, /api/auth/**, /api/profile_img, /api/chat, /api/members/**, /api/representative_member/**, /api/project/**
         - id: ganttchartservice
           uri: http://localhost:8002
           predicates:
@@ -19,3 +19,17 @@ spring:
           uri: http://localhost:8003
           predicates:
             - Path=/api/plan/**
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: 'http://localhost:5173'
+            allow-credentials: true
+            allowedHeaders: '*'
+            allowedMethods:
+              - PUT
+              - GET
+              - POST
+              - DELETE
+#              - MESSAGE

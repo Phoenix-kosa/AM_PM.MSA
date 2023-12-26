@@ -50,7 +50,7 @@ const request = reactive({
 
 const login = () => {
     // console.log(request.userId  + "/"+ request.password)
-    axios.post("http://localhost:8090/api/auth/local", request, {
+    axios.post("http://localhost:8088/api/auth/local", request, {
             headers: { 
                 "content-type" : "application/json" }
             })
@@ -79,7 +79,7 @@ const login = () => {
 }
 
 const simpleLogin = () => {
-    window.location.href = "http://localhost:8090/oauth2/authorization/google";
+    window.location.href = "http://localhost:8088/oauth2/authorization/google";
 }
 </script>
 
