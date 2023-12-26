@@ -1,6 +1,6 @@
-server:
-  port: 8001
+# server:
+#   port: 8001
 
-spring:
-  application:
-    name: planservice
+# spring:
+#   application:
+#     name: planservice
