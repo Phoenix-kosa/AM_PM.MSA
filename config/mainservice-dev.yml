@@ -3,7 +3,8 @@ server:
 
 spring:
   application:
-    name: planservice
+    name: mainservice
+    
 eureka:
   client:
     register-with-eureka: true
