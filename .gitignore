@@ -1,0 +1,15 @@
+
+configserver/gradlew
+*.bat
+*.gradle
+*.jar
+*.jar
+ganttchartservice/gradle/wrapper/gradle-wrapper.properties
+ganttchartservice/gradlew
+ganttchartservice/gradle/wrapper/gradle-wrapper.jar
+*.jar
+mainservice/gradle/wrapper/gradle-wrapper.properties
+mainservice/gradlew
+planservice/gradle/wrapper/gradle-wrapper.jar
+planservice/gradle/wrapper/gradle-wrapper.properties
+planservice/gradlew
