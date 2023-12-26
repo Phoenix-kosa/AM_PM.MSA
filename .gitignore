@@ -13,3 +13,8 @@ mainservice/gradlew
 planservice/gradle/wrapper/gradle-wrapper.jar
 planservice/gradle/wrapper/gradle-wrapper.properties
 planservice/gradlew
+eurekaserver/gradle/wrapper/gradle-wrapper.jar
+eurekaserver/gradle/wrapper/gradle-wrapper.jar
+eurekaserver/gradle/wrapper/gradle-wrapper.properties
+eurekaserver/gradlew
+eurekaserver/gradle/wrapper/gradle-wrapper.jar
