@@ -9,6 +9,7 @@ import phoenix.AM_PM.mainservice.domain.project.dto.RequestProject;
 import phoenix.AM_PM.mainservice.domain.project.dto.ResponseProject;
 import phoenix.AM_PM.mainservice.domain.project.service.ProjectService;
 import phoenix.AM_PM.mainservice.global.config.auth.MyUserDetails;
+import phoenix.AM_PM.mainservice.openfeign.ProjectPlanServiceClient;
 
 import java.util.List;
 
@@ -17,6 +18,11 @@ import java.util.List;
 public class ProjectController {
     private final ProjectService projectService;
     //private final ProjectPlanService projectPlanService;
+
+    @Autowired
+    private ProjectPlanServiceClient projectPlanServiceClient;
+
+
 
     @Autowired
     public ProjectController(ProjectService projectService) {
@@ -41,6 +47,7 @@ public class ProjectController {
                                         @AuthenticationPrincipal MyUserDetails myUserDetails) {
         ResponseProject project = projectService.createProject(requestProject, myUserDetails.getUser());
         //여기 수정하세요 projectPlanService.createDefaultProjectPlans(project.getId());
+        projectPlanServiceClient.createDefaultProjectPlans(project.getId()); // Feign 클라이언트를 사용하여 호출
         return new ResponseEntity(project, HttpStatus.CREATED);
     }
 
