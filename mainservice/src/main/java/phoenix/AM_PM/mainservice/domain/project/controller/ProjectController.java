@@ -17,16 +17,12 @@ import java.util.List;
 @RequestMapping("/api/project")
 public class ProjectController {
     private final ProjectService projectService;
-    //private final ProjectPlanService projectPlanService;
+    private final ProjectPlanServiceClient projectPlanServiceClient;
 
     @Autowired
-    private ProjectPlanServiceClient projectPlanServiceClient;
-
-
-
-    @Autowired
-    public ProjectController(ProjectService projectService) {
+    public ProjectController(ProjectService projectService, ProjectPlanServiceClient projectPlanServiceClient) {
         this.projectService = projectService;
+        this.projectPlanServiceClient = projectPlanServiceClient;
     }
 
     // 목록 조회
@@ -46,12 +42,9 @@ public class ProjectController {
     public ResponseEntity createProject(@RequestBody RequestProject requestProject,
                                         @AuthenticationPrincipal MyUserDetails myUserDetails) {
         ResponseProject project = projectService.createProject(requestProject, myUserDetails.getUser());
-        //여기 수정하세요 projectPlanService.createDefaultProjectPlans(project.getId());
         projectPlanServiceClient.createDefaultProjectPlans(project.getId()); // Feign 클라이언트를 사용하여 호출
         return new ResponseEntity(project, HttpStatus.CREATED);
     }
-
-
     // 수정
     @PutMapping("/{project-id}")
     public ResponseEntity modifyProject(@RequestBody RequestProject requestProject,
