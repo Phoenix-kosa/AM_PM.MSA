@@ -145,42 +145,40 @@ export default{
       })
     },
     fnASave(){
-      let apiUrl = "http://localhost:8088/api/answer/write"
+      let apiUrl = "http://localhost:8090/api/answer/write"
       this.form = {
         "questionId": this.id,
         "title": this.Atitle,
         "content": this.Acontent
       }
-      
-
       console.log(this.form)
 
       axios.post(apiUrl, this.form)
         .then(response => {
+          // if (response.status == 200){
+          alert("저장되었습니다.")
           console.log(response.data);
+          this.fnGetQuestion();
+          this.$router.push({
+          path: './question',
+          query: this.requestBody
+          })
         }).catch(err => {
-          console.error(error);
-
-        });
-        this.$router.push({
-        path: './question',
-        query: this.requestBody
-      })
-      
+          console.error(error);         
+        })  
     },
     fnAdelete(){
       if (!confirm("글을 삭제하시겠습니까?")) return
 
-        axios.delete("http://localhost:8088/api/answer/"+this.id)
+        axios.delete("http://localhost:8090/api/answer/"+this.id)
         .then(() => {
           alert('삭제되었습니다.')
-        this.fnGetQuestion();
-      })
-
-      this.$router.push({
-        path: './question',
-        query: this.requestBody
-      })
+          this.fnGetQuestion();
+          this.$router.push({
+          path: './question',
+          query: this.requestBody
+        })
+      })      
     },
 
   }  
