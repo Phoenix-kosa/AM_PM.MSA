@@ -57,21 +57,21 @@ export default {
     },
     uploadUrl() {
       const projectId = sessionStorage.getItem("projectId");
-      return this.pageType ? `http://localhost:8090/api/plan/user-${this.pageType.toLowerCase()}/${projectId}` : '';
+      return this.pageType ? `http://localhost:8088/api/plan/user-${this.pageType.toLowerCase()}/${projectId}` : '';
     },
     defaultData() {
     return {
       ERD: {
         sampleUrl: 'https://www.erdcloud.com/',
-        imagePreview: 'http://localhost:8090/img/plan/default-erd-image.png'
+        imagePreview: 'http://localhost:8088/img/plan/default-erd-image.png'
       },
       USECASE: {
         sampleUrl: 'https://darw.io/',
-        imagePreview: 'http://localhost:8090/img/plan/default-usecase-image.png'
+        imagePreview: 'http://localhost:8088/img/plan/default-usecase-image.png'
       },
       ui: {
         sampleUrl: 'https://www.figma.com/',
-        imagePreview: 'http://localhost:8090/img/plan/default-ui-image.png'
+        imagePreview: 'http://localhost:8088/img/plan/default-ui-image.png'
       }
     };
   }
@@ -99,7 +99,7 @@ export default {
         return;
     }
 
-    axios.delete(`http://localhost:8090/api/plan/${pageTitle}`)
+    axios.delete(`http://localhost:8088/api/plan/${pageTitle}`)
         .then(response => {
             Swal.fire({
                 title: 'Success!',
@@ -147,7 +147,7 @@ export default {
   formData.append('sampleUrl', defaultDataForPageType.sampleUrl);
   formData.append('sampleImg', defaultDataForPageType.imagePreview);
 
-  axios.post('http://localhost:8090/api/plan/create-page', formData, {
+  axios.post('http://localhost:8088/api/plan/create-page', formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }
@@ -170,7 +170,7 @@ export default {
 saveUrl() {
   const projectId = sessionStorage.getItem("projectId");
   const title = this.pageType; 
-  axios.put(`http://localhost:8090/api/plan/update-url/${projectId}/${title}`, { newSampleUrl: this.editableSampleUrl })
+  axios.put(`http://localhost:8088/api/plan/update-url/${projectId}/${title}`, { newSampleUrl: this.editableSampleUrl })
     .then(response => {
       Swal.fire({
       title: 'Success!',
@@ -194,7 +194,7 @@ saveUrl() {
   if (this.pageType) {
     const projectId = sessionStorage.getItem("projectId");
     if (this.pageType && projectId) {
-      const url = `http://localhost:8090/api/plan/${this.pageType.toLowerCase()}-example/${projectId}`;
+      const url = `http://localhost:8088/api/plan/${this.pageType.toLowerCase()}-example/${projectId}`;
       axios.get(url)
         .then(response => {
           const data = response.data;

@@ -37,7 +37,7 @@ const projectSelect = () => {
 
 const logout = () => {
   axios
-    .delete("http://localhost:8090/api/auth", {
+    .delete("http://localhost:8088/api/auth", {
       headers: {
         Authorization: sessionStorage.getItem("access-token"),
       },

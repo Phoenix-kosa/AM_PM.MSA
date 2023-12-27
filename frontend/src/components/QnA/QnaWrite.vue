@@ -6,8 +6,7 @@
       <label for="title" class="form-label">제목: </label>
       <input type="text" v-model="title" class="form-control" placeholder="제목을 입력하세요.">
       <div v-if="!title" class="error-message"></div>
-      <!-- 이름:<input type="text" v-model="userId" class="w3-input w3-border" placeholder="작성자를 입력하세요." v-if="id === undefined">
-      <div v-if="id === undefined && !userId" class="error-message"></div> -->
+  
     </div>
     <br>
     <div class="mb-3">
@@ -25,6 +24,8 @@
 
 <script>
 
+import Swal from 'sweetalert2';
+import { expireToken } from "@/api/config";
 import axios from 'axios'
 export default {
   data(){
@@ -55,9 +56,9 @@ export default {
         this.fnSave();
       }
     },
-    fnGetView(){
+    fnGetView: function(){
       if (this.id !== undefined) {
-        axios.get("http://localhost:8090/api/question/"+this.id,{
+        axios.get("http://localhost:8088/api/question/"+this.id,{
           params: this.requestBody
         }).then((res) => {
         this.title = res.data.title
@@ -82,7 +83,7 @@ export default {
       })
     },
     fnSave(){
-      let apiUrl = "http://localhost:8090/api/question"
+      let apiUrl = "http://localhost:8088/api/question"
       this.form = {
         "id": this.id,
         "title": this.title,
@@ -104,7 +105,7 @@ export default {
           if(error.response.status == 401) {
                 console.log("토큰 만료");
 
-                axios.get("http://localhost:8090/api/rtoken", {
+                axios.get("http://localhost:8088/api/rtoken", {
                     headers: { 
                         "RefreshToken" : sessionStorage.getItem("refresh-token"),
                         "Authorization" : sessionStorage.getItem("access-token") }
@@ -129,7 +130,7 @@ export default {
           if(error.response.status == 401) {
                 console.log("토큰 만료");
 
-                axios.get("http://localhost:8090/api/rtoken", {
+                axios.get("http://localhost:8088/api/rtoken", {
                     headers: { 
                         "RefreshToken" : sessionStorage.getItem("refresh-token"),
                         "Authorization" : sessionStorage.getItem("access-token") }

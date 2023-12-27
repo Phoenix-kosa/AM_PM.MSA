@@ -52,7 +52,7 @@ const removeMember = () => {
 
   console.log(formdata)
   if(formdata.length> 0){
-    axios.delete("http://localhost:8090/api/members/" + projectId, {
+    axios.delete("http://localhost:8088/api/members/" + projectId, {
       headers: {
         "Authorization" : sessionStorage.getItem("access-token") 
       } , data: {"members":formdata}
@@ -71,7 +71,7 @@ const removeMember = () => {
 }
 
 function loadData(){
-  axios.get(`http://localhost:8090/api/members/` + projectId, {
+  axios.get(`http://localhost:8088/api/members/` + projectId, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }
@@ -95,7 +95,7 @@ function loadData(){
 }
 
 const getrepResentativeMember = () => {
-  axios.get(`http://localhost:8090/api/representative_member/` + projectId, {
+  axios.get(`http://localhost:8088/api/representative_member/` + projectId, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }
