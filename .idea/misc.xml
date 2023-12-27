@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="ProjectRootManager">
+=======
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="17" project-jdk-type="JavaSDK">
+>>>>>>> 7125eb010436a8c1e0e599a0cab08a8d0d512325
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
