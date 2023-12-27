@@ -2,7 +2,7 @@
   <div class="">
     <h1>1:1 문의</h1><br>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button type="button" class="btn btn-outline-primary text-white bg-blue" v-on:click="fnWrite">문의등록</button>
+      <button v-show="roles!='ROLE_ADMIN'" type="button" class="btn btn-outline-primary text-white bg-blue" v-on:click="fnWrite">문의등록</button>
     </div><br>
     <table class="table">
       <thead class="table-primary">
@@ -40,11 +40,13 @@ export default {
       requestBody: {},
       list: reactive({}),
       no: '',
-      status: false
+      status: false,
+      roles: ''
     }
   },
   mounted() {
     this.fnGetList()
+    this.fnGetUser()
   },
   methods: {
     fnGetList: function() {
@@ -62,8 +64,19 @@ export default {
       }).catch(err => {
         console.log(err)
         expireToken(err, this.fnGetList);
-      })    
+      })     
+    },
 
+    fnGetUser: function(){
+      axios.get("http://localhost:8088/api/user", {headers: { 
+          "Authorization" : sessionStorage.getItem("access-token") }       
+      }).then((res) => {
+        console.log(res)
+        this.roles = res.data.role;
+        
+      }).catch(err => {
+        expireToken(err, this.fnGetUser);
+      })
     },
 
     fnView(id){

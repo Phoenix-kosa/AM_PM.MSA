@@ -78,7 +78,7 @@ export default{
   },
   methods: {
     fnGetQuestion: function(){
-      axios.get("http://localhost:8090/api/question/"+this.id,{
+      axios.get("http://localhost:8088/api/question/"+this.id,{
         params: this.requestBody
       }).then((res) => {
         console.log(res)
@@ -91,7 +91,7 @@ export default{
       })
     },
     fnGetAnswer: function(){
-      axios.get("http://localhost:8090/api/answer/"+this.id,{
+      axios.get("http://localhost:8088/api/answer/"+this.id,{
       }).then((res) => {
         console.log(res)
         this.getTitle = res.data.title
@@ -103,7 +103,7 @@ export default{
     },
 
     fnGetUser: function(){
-      axios.get("http://localhost:8090/api/user", {headers: { 
+      axios.get("http://localhost:8088/api/user", {headers: { 
           "Authorization" : sessionStorage.getItem("access-token") }       
       }).then((res) => {
         console.log(res)
@@ -138,7 +138,7 @@ export default{
     fnQdelete: function(){
       if (!confirm("글을 삭제하시겠습니까?")) return
 
-      axios.delete("http://localhost:8090/api/question/"+this.id,{})
+      axios.delete("http://localhost:8088/api/question/"+this.id,{})
         .then(() => {
           alert('삭제되었습니다.')
           this.fnList();
@@ -147,7 +147,7 @@ export default{
       })
     },
     fnASave(){
-      let apiUrl = "http://localhost:8090/api/answer/write"
+      let apiUrl = "http://localhost:8088/api/answer/write"
       this.form = {
         "questionId": this.id,
         "title": this.Atitle,
@@ -173,7 +173,7 @@ export default{
     fnAdelete(){
       if (!confirm("글을 삭제하시겠습니까?")) return
 
-        axios.delete("http://localhost:8090/api/answer/"+this.id)
+        axios.delete("http://localhost:8088/api/answer/"+this.id)
         .then(() => {
           alert('삭제되었습니다.')
           this.fnGetQuestion();
