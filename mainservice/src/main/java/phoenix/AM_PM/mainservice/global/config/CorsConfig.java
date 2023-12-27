@@ -15,6 +15,7 @@ public class CorsConfig {
       CorsConfiguration config = new CorsConfiguration();
       config.setAllowCredentials(true);
       config.addAllowedOrigin("http://localhost:5173"); // e.g. http://domain1.com
+      config.addAllowedOrigin("http://localhost:8001");
       config.addAllowedHeader("*");
       config.addExposedHeader("Authorization");
       config.addExposedHeader("RefreshToken");
