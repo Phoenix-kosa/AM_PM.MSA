@@ -21,6 +21,9 @@ public class Answer {
   @Column(name = "id")
   private Integer id; //답변 ID
 
+//  private String userId;
+
+
   private Integer bulletinId; //문의 ID
 
   @Column (name = "title")
