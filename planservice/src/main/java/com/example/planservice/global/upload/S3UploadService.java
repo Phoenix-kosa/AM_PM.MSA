@@ -16,7 +16,7 @@ public class S3UploadService {
 
     private final AmazonS3 amazonS3;
 
-    @Value("${BUCKET_NAME}")
+    @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
     public String saveFile(MultipartFile multipartFile) throws IOException {
