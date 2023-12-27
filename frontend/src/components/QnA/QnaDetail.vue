@@ -13,7 +13,7 @@
         <span style="margin-left: 4px;">{{ Qcontent }}</span><br>         
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-bottom: 5px; margin-right: 3px;">
-        <button type="button" class="btn btn-outline-primary" v-on:click="fnUpdate">수정</button>
+        <button v-show="roles!='ROLE_ADMIN'" type="button" class="btn btn-outline-primary" v-on:click="fnUpdate">수정</button>
         <button type="button" class="btn btn-outline-primary" v-on:click="fnQdelete">삭제</button>
         <button type="button" class="btn btn-outline-primary" v-on:click="fnList">목록</button>
       </div>
@@ -28,18 +28,20 @@
       </div>
       <hr><br>
       <div class="board-contents">
-        <span style="margin-left: 4px;">{{ getContent }}</span><br>         
+        <span style="margin-left: 4px;">{{ getContent }}</span><br>
+        <button v-show="roles=='ROLE_ADMIN'" type="button" class="btn btn-outline-primary" v-on:click="fnAdelete" style="margin-left: 89%; margin-bottom: 5px;">삭제</button>         
       </div>
 
   </div>
-  <table v-show="roles=='ROLE_ADMIN'">      
+  <table v-show="roles=='ROLE_ADMIN'" style="margin-top: 20px; margin-left: 25%;">      
     <div class="mb-3">
       <input type="text" v-model="Atitle" class="form-control" placeholder="제목을 입력하세요.">
       <textarea name="" id="" cols="90" rows="10" v-model="Acontent" class="form-control form-control-sm" placeholder="내용을 입력하세요." style="resize: none;" required></textarea>
+      
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <button type="button" class="btn btn-outline-primary" v-on:click="fnASave">저장</button>
-      <button type="button" class="btn btn-outline-primary" v-on:click="fnAdelete">삭제</button>
+      
     </div>
   </table>  
 </template>
@@ -76,7 +78,7 @@ export default{
   },
   methods: {
     fnGetQuestion: function(){
-      axios.get("http://localhost:8088/api/question/"+this.id,{
+      axios.get("http://localhost:8090/api/question/"+this.id,{
         params: this.requestBody
       }).then((res) => {
         console.log(res)
@@ -89,7 +91,7 @@ export default{
       })
     },
     fnGetAnswer: function(){
-      axios.get("http://localhost:8088/api/answer/"+this.id,{
+      axios.get("http://localhost:8090/api/answer/"+this.id,{
       }).then((res) => {
         console.log(res)
         this.getTitle = res.data.title
@@ -101,7 +103,7 @@ export default{
     },
 
     fnGetUser: function(){
-      axios.get("http://localhost:8088/api/user", {headers: { 
+      axios.get("http://localhost:8090/api/user", {headers: { 
           "Authorization" : sessionStorage.getItem("access-token") }       
       }).then((res) => {
         console.log(res)
@@ -136,7 +138,7 @@ export default{
     fnQdelete: function(){
       if (!confirm("글을 삭제하시겠습니까?")) return
 
-      axios.delete("http://localhost:8088/api/question/"+this.id,{})
+      axios.delete("http://localhost:8090/api/question/"+this.id,{})
         .then(() => {
           alert('삭제되었습니다.')
           this.fnList();
@@ -164,8 +166,9 @@ export default{
           query: this.requestBody
           })
         }).catch(err => {
-          console.error(error);         
-        })  
+          console.error(error);
+          
+        })              
     },
     fnAdelete(){
       if (!confirm("글을 삭제하시겠습니까?")) return
@@ -183,7 +186,6 @@ export default{
 
   }  
 }
-
 </script>
 <style scoped>
 #table {
