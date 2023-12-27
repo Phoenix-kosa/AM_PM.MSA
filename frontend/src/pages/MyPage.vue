@@ -135,6 +135,7 @@ const submitForm = () => {
           icon: "success",
           title: "회원정보 수정 완료",
         });
+        window.location.reload();
       })
       .catch((error) => {
         expireToken(error, submitForm);

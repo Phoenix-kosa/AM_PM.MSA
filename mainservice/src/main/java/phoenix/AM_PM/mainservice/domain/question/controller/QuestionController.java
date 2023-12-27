@@ -3,28 +3,35 @@ package phoenix.AM_PM.mainservice.domain.question.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import phoenix.AM_PM.mainservice.domain.question.dto.QuestionDTO;
 import phoenix.AM_PM.mainservice.domain.question.entity.Question;
 import phoenix.AM_PM.mainservice.domain.question.service.QuestionService;
+import phoenix.AM_PM.mainservice.domain.user.service.UserService;
 import phoenix.AM_PM.mainservice.global.config.service.JwtService;
 
 import java.util.List;
+
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/question")
 public class QuestionController {
-    @Autowired
-    private QuestionService questionService;
+    private final QuestionService questionService;
+    private final UserService userService;
     private final JwtService jwtService;
     @GetMapping("")
     public List<Question> questionlist(@RequestHeader(value = "Authorization", required = false) String token){
         String name = jwtService.getId(token);
 
-        return questionService.getQuestionList(name);
+        if (userService.findbyUserId(jwtService.getId(token)).get().getRoles().equals("ROLE_ADMIN")){
+            return questionService.findAll();
+        }
+        else {
+            return questionService.getQuestionList(name);
+        }
+
     }
 
     @GetMapping("/{question-id}")
@@ -42,7 +49,7 @@ public class QuestionController {
             questionService.create(questionDTO, name);
             result = true;
         } catch (Exception e) {
-            System.out.println("오류");
+            System.out.println("오류: " + e.getMessage());
         }
         return result;
     }

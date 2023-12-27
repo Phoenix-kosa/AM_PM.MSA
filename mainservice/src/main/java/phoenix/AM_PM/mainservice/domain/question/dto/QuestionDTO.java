@@ -3,7 +3,6 @@ package phoenix.AM_PM.mainservice.domain.question.dto;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Data
 @Getter
@@ -14,9 +13,9 @@ import java.time.LocalDateTime;
 @Builder
 
 public class QuestionDTO implements Serializable {
-    private int id;
+    private Integer id;
     private String userId;
-    private int projectId;
+    private Integer projectId;
     private String title;
     private String content;
     private String createdDate;

@@ -10,7 +10,7 @@ spring:
         - id: mainservice
           uri: http://localhost:8001
           predicates:
-            - Path=/api/user, /api/user/**, /api/auth, /api/auth/**, /api/profile_img, /api/chat, /api/members/**, /api/representative_member/**, /api/project/**, /api/notice/**
+            - Path=/api/user, /api/user/**, /api/auth, /api/auth/**, /api/profile_img, /api/chat, /api/members/**, /api/representative_member/**, /api/project/**, /api/notice/**, /api/question/**, /api/answer/**
         - id: ganttchartservice
           uri: http://localhost:8002
           predicates:

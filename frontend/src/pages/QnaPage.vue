@@ -57,11 +57,12 @@ export default {
         headers: {"Authorization" : sessionStorage.getItem("access-token")}
       }).then((res) => {
         this.list = res.data
-
+        console.log(list)
+        console.log(list.value)
       }).catch(err => {
         console.log(err)
         expireToken(err, this.fnGetList);
-      })     
+      })    
 
     },
 

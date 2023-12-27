@@ -1,5 +1,6 @@
 package phoenix.AM_PM.mainservice.domain.question.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,10 @@ public class QuestionService {
 
     private final QuestionRepository questionR;
 
+
+    public List<Question> findAll(){
+        return questionR.findAll();
+    }
     //목록 가져오기
     public List<Question> getQuestionList(String userId){
         return questionR.findByUserId(userId);
@@ -39,6 +44,8 @@ public class QuestionService {
                 .title(questionDTO.getTitle())
                 .content(questionDTO.getContent())
                 .createdDate(LocalDateTime.now())
+                .projectId(0)
+                .status(false)
                 .build();
         return questionR.save(question);
     }
@@ -53,5 +60,21 @@ public class QuestionService {
     public void delete(int id){
         Question question = questionR.findById(id).orElseThrow(() -> new RuntimeException("게시글 x"));
         questionR.delete(question);
+    }
+
+    //Status 업데이트
+    @Transactional
+    public Question updateStatus(int id){
+        Question question = questionR.findById(id).orElseThrow(() -> new RuntimeException("게시글 x"));
+        question.setStatus(true);
+        return questionR.save(question);
+    }
+
+    //Status 업데이트
+    @Transactional
+    public Question deleteStatus(int id){
+        Question question = questionR.findById(id).orElseThrow(() -> new RuntimeException("게시글 x"));
+        question.setStatus(false);
+        return questionR.save(question);
     }
 }
