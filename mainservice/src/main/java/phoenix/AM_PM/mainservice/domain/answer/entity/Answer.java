@@ -3,7 +3,6 @@ package phoenix.AM_PM.mainservice.domain.answer.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
-import phoenix.AM_PM.mainservice.domain.question.entity.Question;
 import phoenix.AM_PM.mainservice.domain.user.entity.User;
 
 import java.time.LocalDateTime;
@@ -30,6 +29,9 @@ public class Answer {
   @Column (name = "content")
   private String content;
 
+  private Integer questionId;
+
+  private boolean status;
   @Column(name = "created_date")
   @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime createdDate;
@@ -40,10 +42,6 @@ public class Answer {
     this.content = content;
   }
 
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  private Question question;    // 댓글이 달린 게시판
-
   @ManyToOne(fetch = FetchType.LAZY)
   private User user;  // 작성자
 
@@ -52,10 +50,4 @@ public class Answer {
     this.content = content;
   }
 
-//  public void changeUserId(User userId){
-//    this.user = userId;
-//  }
-//  public void changePost(Question question){
-//    this.question = question;
-//  }
 }
