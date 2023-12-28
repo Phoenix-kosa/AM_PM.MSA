@@ -25,5 +25,7 @@ public interface ProjectPlanRepository extends JpaRepository<ProjectPlan, Intege
     Optional<ProjectPlan> findByTitleAndProjectId(String title, int projectId);
     List<ProjectPlan> findByTitle(String title);
 
+    boolean deleteAllByProjectId(Integer projectId);
+
 }
 

@@ -36,7 +36,7 @@ function checkAdmin() {
   })
   .then((response) => {
     if(response.data.role == "ROLE_ADMIN"){
-      router.push("/question")
+      router.push("/admin-question")
     }
 
   })

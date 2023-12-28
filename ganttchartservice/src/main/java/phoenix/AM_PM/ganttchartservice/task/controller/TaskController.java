@@ -1,5 +1,6 @@
 package phoenix.AM_PM.ganttchartservice.task.controller;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -87,5 +88,20 @@ public class TaskController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
         }
+    }
+
+    @DeleteMapping("/task/project/{projectId}")
+    @Transactional
+    public ResponseEntity<?> deleteAllByProjectId(@PathVariable("projectId") int projectId) {
+        HttpStatus status = HttpStatus.CREATED;
+        try{
+            taskRepository.deleteAllByProjectId(projectId);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return ResponseEntity
+                .status(status)
+                .build();
     }
 }
