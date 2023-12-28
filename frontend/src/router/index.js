@@ -21,7 +21,6 @@ import ModifyProject from "@/pages/ModifyProject.vue";
 import AddMember from "@/pages/AddMember.vue";
 import QnaDetail from "@/components/QnA/QnaDetail.vue";
 import QnaWrite from "@/components/QnA/QnaWrite.vue";
-import QnaAnswer from "@/components/QnA/QnaAnswer.vue";
 import MemberList from "@/pages/MemberList.vue";
 import LeaderChange from "@/pages/LeaderChange.vue";
 const index = createRouter({
@@ -46,29 +45,6 @@ const index = createRouter({
           props: true 
         },
 
-        /*
-        { path: "excel", component: Excel },
-        { path: "testtoken", component: TestToken },
-        {
-          path: "/:pageType/:projectId",
-          name: "ProjectPlanPage",
-          component: ProjectPlan,
-          props: true 
-        },
-        */
-
-
-
-        { path: "question", component: QnaPage},
-        { path: "detail", component: QnaDetail},
-        { path: "team-chat", component: TeamChat},
-        { path: "/chat",
-          component: Chat,
-          name: "Chat"},
-        { path: "project-list", component: ProjectList },
-        { path: "create-project", component: CreateProject,
-          props: true, // 모든 params를 props로 전달합니다.
-        },
         { path: "question", component: QnaPage },
         { path: "detail", component: QnaDetail },
         { path: "team-chat", component: TeamChat },
@@ -76,7 +52,6 @@ const index = createRouter({
         { path: "modify-project", component: ModifyProject },
         { path: "add-member", component: AddMember },
         { path: "write", component: QnaWrite },
-        { path: "answer", component: QnaAnswer },
         { path: "member-list", component: MemberList },
         { path: "leader-change", component: LeaderChange },
       ],

@@ -13,14 +13,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+
 public class Question {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
-  private int id;
+  private Integer id;
 
   @Column(name="user_id")
   private String userId;
-  private int projectId;
+
+  @Column(nullable = false)
+  private Integer projectId;
   private String title;
   private String content;
 
@@ -29,5 +32,4 @@ public class Question {
 
   private boolean status;
 
-  // Constructors, getters, and setters
 }

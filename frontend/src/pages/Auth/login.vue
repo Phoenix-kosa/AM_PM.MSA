@@ -35,6 +35,7 @@
 <script setup>
 import { reactive } from 'vue';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 // axios.defaults.withCredentials = true;
 
@@ -62,7 +63,16 @@ const login = () => {
 
                 sessionStorage.setItem("access-token", response.headers.authorization);
                 sessionStorage.setItem("refresh-token", response.headers.refreshtoken);
-                router.push("/project-list")
+                Swal.fire({
+                    title: 'Success!',
+                    text: '로그인 성공!',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                }).then(result => {
+                    if(result.value){
+                        router.push("/project-list")
+                    }}
+                )
             } else {
                 console.log(response)
                 // 로그인 실패 시 오류 메시지를 팝업 창으로 표시
@@ -72,7 +82,12 @@ const login = () => {
             }
         })
         .catch(error => {
-            alert("로그인 실패");
+            Swal.fire({
+                    title: '로그인 실패!',
+                    text: '아이디 및 비밀번호를 확인해주세요',
+                    icon: 'warning',
+                    confirmButtonText: 'OK',
+                })
             console.error(error);
             console.log(error.response.status)
         });

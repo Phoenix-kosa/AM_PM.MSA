@@ -27,6 +27,7 @@ import { ref } from 'vue';
 import { refresh } from "@/api/refresh";
 import { useRouter } from 'vue-router';
 import { expireToken } from "../api/config";
+import Swal from 'sweetalert2';
 const router = useRouter();
 
 const projectId = sessionStorage.getItem("projectId");
@@ -43,14 +44,22 @@ const memberList = () => {
     formdata.push(o);
   }
   console.log("FormData " + formdata);
-  axios.put("http://localhost:8090/api/members/" + projectId, {"members":formdata}, {
+  axios.put("http://localhost:8088/api/members/" + projectId, {"members":formdata}, {
     headers: {
       "Authorization" : sessionStorage.getItem("access-token") 
     }
   }).then(response => {
     console.log(response.status)
-    alert("맴버 추가 완료!")
-    router.push("/member-list")
+    Swal.fire({
+        title: 'Success!',
+        text: '맴버 추가 성공!',
+        icon: 'success',
+        confirmButtonText: 'OK',
+    }).then(result => {
+        if(result.value){
+            router.push("/member-list")
+        }}
+    )
 
   })
   .catch((err) => {
@@ -61,7 +70,7 @@ const memberList = () => {
 
 const submitForm = () => {
   // console.log(searchMember.value);
-  axios.get(`http://localhost:8090/api/user/nickname?nickname=${searchMember.value}`)
+  axios.get(`http://localhost:8088/api/user/nickname?nickname=${searchMember.value}`)
   .then(request => {
     filteredData.value = [];
     let checkid = [];
@@ -78,7 +87,7 @@ const submitForm = () => {
 }
 
 function loadData(){
-  axios.get(`http://localhost:8090/api/members/` + projectId, {
+  axios.get(`http://localhost:8088/api/members/` + projectId, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }

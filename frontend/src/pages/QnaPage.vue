@@ -2,7 +2,7 @@
   <div class="">
     <h1>1:1 문의</h1><br>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button type="button" class="btn btn-outline-primary text-white bg-blue" v-on:click="fnWrite">문의등록</button>
+      <button v-show="roles!='ROLE_ADMIN'" type="button" class="btn btn-outline-primary text-white bg-blue" v-on:click="fnWrite">문의등록</button>
     </div><br>
     <table class="table">
       <thead class="table-primary">
@@ -17,9 +17,10 @@
       <tbody>
         <tr v-for="(row,idx) in list" :key="idx">
           <td>{{ row.id }}</td>
-          <td><a v-on:click="fnView(`${row.id}`)">{{ row.title}}</a></td>
+          <td><a v-on:click="fnView(`${row.id}`)" style="cursor:pointer">{{ row.title}}</a></td>
           <td>{{ row.userId }}</td>
-          <td v-if="row.status == false" class="text-primary">답변대기</td>
+          <td v-if="row.status == false" class="text-primary" style="">답변대기</td>
+          <td v-else="row.status == true" class="text-success" >답변완료</td>
           <td>{{ row.createdDate }}</td>
         </tr>
       </tbody>
@@ -28,67 +29,68 @@
 </template>
 
 <script>
+
+import Swal from 'sweetalert2';
+import { expireToken } from "@/api/config";
 import axios from 'axios';
+import { reactive } from 'vue';
 export default {
   data() {
     return {
       requestBody: {},
-      list: {},
+      list: reactive({}),
       no: '',
+      status: false,
+      roles: ''
     }
   },
   mounted() {
     this.fnGetList()
+    this.fnGetUser()
   },
   methods: {
-    async fnGetList() {
+    fnGetList: function() {
       this.requestBody = {
         keyword: this.keyword,
         
       }
-
-      axios.get("http://localhost:8090/api/question", {
+      axios.get("http://localhost:8088/api/question", {
         params: this.requestBody,
         headers: {"Authorization" : sessionStorage.getItem("access-token")}
       }).then((res) => {
-        
         this.list = res.data
+        console.log(list)
+        console.log(list.value)
+      }).catch(err => {
+        console.log(err)
+        expireToken(err, this.fnGetList);
+      })     
 
-      }).catch((error) => {
-        console.log(error.message);
-        if(error.response.status == 401) {
-                console.log("토큰 만료");
-
-                axios.get("http://localhost:8090/api/rtoken", {
-                    headers: { 
-                        "RefreshToken" : sessionStorage.getItem("refresh-token"),
-                        "Authorization" : sessionStorage.getItem("access-token") }
-                    }).then(response => {
-                        console.log(response)
-                        if(response.status == 200){
-                            console.log("토큰 재발급");
-                            console.log(response.headers.authorization);
-                            sessionStorage.setItem("access-token", response.headers.authorization);
-                        } else {
-                            console.log("토큰 재발급 실패");
-                        }
-                    }).catch(error => {console.error(error);})
-            } 
-      })        
-      
     },
+
+    fnGetUser: function(){
+      axios.get("http://localhost:8088/api/user", {headers: { 
+          "Authorization" : sessionStorage.getItem("access-token") }       
+      }).then((res) => {
+        console.log(res)
+        this.roles = res.data.role;
+        
+      }).catch(err => {
+        expireToken(err, this.fnGetUser);
+      })
+    },
+
     fnView(id){
       this.requestBody.id = id
       this.$router.push({
         path: './detail',
         query: this.requestBody
-      })
+      })   
     },
     fnWrite() {
       this.$router.push({
         path: './write'
       })
-
     }
   }
   
@@ -98,4 +100,8 @@ export default {
 
 <style scoped>
 /* @import '@/assets/css/question.css'; */
+
+.table {
+  text-align: center;
+}
 </style>

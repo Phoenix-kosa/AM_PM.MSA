@@ -27,6 +27,7 @@ import axios from 'axios';
 import { ref } from 'vue';
 import { expireToken } from "../api/config";
 import { useRouter } from 'vue-router';
+import Swal from 'sweetalert2';
 const router = useRouter();
 
 const memberList = ref([]);
@@ -37,26 +38,39 @@ const projectId = sessionStorage.getItem("projectId");
 const leaderChange = () => {
   console.log(userform.value)
   if(userform){
-    axios.put("http://localhost:8090/api/representative_member/" + projectId, {"members":[userform.value]}, {
+    axios.put("http://localhost:8088/api/representative_member/" + projectId, {"members":[userform.value]}, {
       headers: {
         "Authorization" : sessionStorage.getItem("access-token") 
       }
     }).then(response => {
       console.log(response.status)
-      alert("프로젝트 대표를 변경했습니다.");
-      router.push("/member-list")
+      Swal.fire({
+            title: 'Success!',
+            text: '프로젝트 대표를 변경했습니다!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+        }).then(result => {
+            if(result.value){
+                router.push("/member-list")
+            }}
+        )
     })
     .catch((err) => {
       console.log(err)
       expireToken(err, leaderChange, userform)
     });
   } else {
-    alert("체크한 유저가 없습니다!");
+    Swal.fire({
+      title: 'Info!',
+      text: '체크한 맴버가 없습니다',
+      icon: 'info',
+      confirmButtonText: 'OK',
+    })
   }
 }
 
 function loadData(){
-  axios.get(`http://localhost:8090/api/members/` + projectId, {
+  axios.get(`http://localhost:8088/api/members/` + projectId, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }
