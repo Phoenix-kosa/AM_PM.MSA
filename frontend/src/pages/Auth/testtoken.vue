@@ -44,7 +44,7 @@ let checkToken = () => {
     // // 로그인 페이지로 리다이렉트하는 등 필요한 작업 수행
     // }
 
-    axios.get("http://localhost:8088/api/atoken", {
+    axios.get("http://192.168.3.84:8088/api/atoken", {
             headers: { 
                 "Authorization" : sessionStorage.getItem("access-token") }
             })
@@ -71,7 +71,7 @@ let checkToken = () => {
             if(error.response.status == 401) {
                 console.log("토큰 만료");
 
-                axios.get("http://localhost:8088/api/rtoken", {
+                axios.get("http://192.168.3.84:8088/api/rtoken", {
                     headers: { 
                         "RefreshToken" : sessionStorage.getItem("refresh-token"),
                         "Authorization" : sessionStorage.getItem("access-token") }

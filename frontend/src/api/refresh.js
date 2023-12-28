@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const refresh = () => {
-    axios.get("http://localhost:8088/api/rtoken", {
+    axios.get("http://192.168.3.84:8088/api/rtoken", {
         headers: { 
             "RefreshToken" : sessionStorage.getItem("refresh-token"),
             "Authorization" : sessionStorage.getItem("access-token") }

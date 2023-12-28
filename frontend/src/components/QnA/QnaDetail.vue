@@ -78,7 +78,7 @@ export default{
   },
   methods: {
     fnGetQuestion: function(){
-      axios.get("http://localhost:8088/api/question/"+this.id,{
+      axios.get("http://192.168.3.84:8088/api/question/"+this.id,{
         params: this.requestBody
       }).then((res) => {
         console.log(res)
@@ -91,7 +91,7 @@ export default{
       })
     },
     fnGetAnswer: function(){
-      axios.get("http://localhost:8088/api/answer/"+this.id,{
+      axios.get("http://192.168.3.84:8088/api/answer/"+this.id,{
       }).then((res) => {
         console.log(res)
         this.getTitle = res.data.title
@@ -103,7 +103,7 @@ export default{
     },
 
     fnGetUser: function(){
-      axios.get("http://localhost:8088/api/user", {headers: { 
+      axios.get("http://192.168.3.84:8088/api/user", {headers: { 
           "Authorization" : sessionStorage.getItem("access-token") }       
       }).then((res) => {
         console.log(res)
@@ -157,7 +157,7 @@ export default{
             cancelButtonText: 'Cancel!'
           }).then(result => {
             if(result.isConfirmed){
-              axios.delete("http://localhost:8088/api/question/"+this.id,{})
+              axios.delete("http://192.168.3.84:8088/api/question/"+this.id,{})
                 .then(() => {
                   Swal.fire({
                     icon: 'success',
@@ -173,7 +173,7 @@ export default{
       })
     },
     fnASave(){
-      let apiUrl = "http://localhost:8088/api/answer/write"
+      let apiUrl = "http://192.168.3.84:8088/api/answer/write"
       this.form = {
         "questionId": this.id,
         "title": this.Atitle,
@@ -210,7 +210,7 @@ export default{
             cancelButtonText: 'Cancel!'
           }).then(result => {
             if(result.isConfirmed){
-              axios.delete("http://localhost:8088/api/answer/"+this.id)
+              axios.delete("http://192.168.3.84:8088/api/answer/"+this.id)
                 .then(result => {
                   console.log(result)
                   Swal.fire({

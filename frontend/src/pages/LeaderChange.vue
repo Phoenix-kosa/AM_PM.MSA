@@ -38,7 +38,7 @@ const projectId = sessionStorage.getItem("projectId");
 const leaderChange = () => {
   console.log(userform.value)
   if(userform){
-    axios.put("http://localhost:8088/api/representative_member/" + projectId, {"members":[userform.value]}, {
+    axios.put("http://192.168.3.84:8088/api/representative_member/" + projectId, {"members":[userform.value]}, {
       headers: {
         "Authorization" : sessionStorage.getItem("access-token") 
       }
@@ -70,7 +70,7 @@ const leaderChange = () => {
 }
 
 function loadData(){
-  axios.get(`http://localhost:8088/api/members/` + projectId, {
+  axios.get(`http://192.168.3.84:8088/api/members/` + projectId, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }

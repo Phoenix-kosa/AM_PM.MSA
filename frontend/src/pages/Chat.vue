@@ -56,7 +56,7 @@ onMounted(() => {
 loadData();
 
 function loadData() {
-  axios.get('http://localhost:8088/api/user/' + target, {
+  axios.get('http://192.168.3.84:8088/api/user/' + target, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }
@@ -68,7 +68,7 @@ function loadData() {
     expireToken(err, loadData);
   });
 
-  axios.get('http://localhost:8088/api/project/' + projectId, {
+  axios.get('http://192.168.3.84:8088/api/project/' + projectId, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }
@@ -85,7 +85,7 @@ function loadData() {
     expireToken(err, loadData);
   });
 
-  axios.get('http://localhost:8088/api/members/' + projectId, {
+  axios.get('http://192.168.3.84:8088/api/members/' + projectId, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }
