@@ -1,11 +1,11 @@
 <template>
-  <h1 class="">대표변경</h1>
+  <h1 class="">Change Leader</h1>
   <div class="center">
   <div class="container">
     <div class="list">
       <ul>
         <form class ="member-list" v-for="item in memberList" :key="item.id">
-          <div v-if="item.roles=='representative_member'" class="representative">
+          <div style="color:blue; font-weight:bold" v-if="item.roles=='representative_member'" class="representative">
             <label :for="item.id"> {{ item.nickName }}</label>
           </div>
           <div v-else>
@@ -17,7 +17,7 @@
     </div>
   </div>
   <div class="clickbutton">
-    <button @click="leaderChange" class="btn btn-primary">프로젝트 대표 변경</button>
+    <button @click="leaderChange" class="btn btn-primary">Change</button>
   </div>
   </div>
 </template>

@@ -1,12 +1,12 @@
 <template>
-  <h2 class="" style="text-align: center;">멤버 목록</h2>
+  <h2 class="" style="text-align: center;">Member List</h2><hr>
   <div class="center">
   <div class="container">
     <div class="list">
       <ul>
         <div class ="member-list" v-for="item in memberList" :key="item.id">
           <div v-if="item.roles=='representative_member'" class="representative">
-            <label :for="item.id"> {{ item.nickName }}</label>
+            <label style="color:blue; font-weight:bold" :for="item.id"> {{ item.nickName }}</label>
           </div>
           <div v-else>
             <input class="checkbox" type="checkbox" v-model="userform" :value="item.userId" :disabled="!leadercheck">
@@ -17,9 +17,9 @@
     </div>
   </div>
   <div class="clickbutton" v-if="leadercheck">
-    <button @click="addMember" class="btn btn-primary">멤버 추가</button>
-    <button @click="removeMember" class="btn btn-primary">멤버 제거</button>
-    <button @click="leaderChange" class="btn btn-primary">프로젝트 대표 변경</button>
+    <button @click="addMember" class="btn btn-primary">Add</button>
+    <button @click="removeMember" class="btn btn-primary">Remove</button>
+    <button @click="leaderChange" class="btn btn-primary">Change</button>
   </div>
   </div>
 </template>
