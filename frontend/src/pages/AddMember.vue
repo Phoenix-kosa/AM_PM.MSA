@@ -1,5 +1,5 @@
 <template>
-  <h2 class="" style="text-align: center;">멤버 추가</h2>
+  <h2 class="" style="text-align: center;">Add Member</h2><hr>
   <div class = "center">
   <div class="container">
     <div class="search">
@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="add">
-    <button @click="memberList" class="btn btn-primary">멤버 추가하기</button>
+    <button @click="memberList" class="btn btn-primary">Add</button>
   </div>
   </div>
 </template>
