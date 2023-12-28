@@ -28,6 +28,24 @@ function go(projectId) {
   router.push({ name: "ProjectPlanPage", params: { pageType: 'srs' } });
 }
 
+function checkAdmin() {
+  axios.get(`http://localhost:8088/api/user`, {
+    headers: { 
+        "Authorization" : sessionStorage.getItem("access-token") 
+    }
+  })
+  .then((response) => {
+    if(response.data.role == "ROLE_ADMIN"){
+      router.push("/question")
+    }
+
+  })
+  .catch((err) => {
+    console.log(err)
+    expireToken(err, checkAdmin);
+  });
+}
+
 function loadData() {
   axios.get(`http://localhost:8088/api/project`, {
     headers: { 
@@ -51,6 +69,7 @@ function loadData() {
     expireToken(err, loadData);
   });
 }
+checkAdmin();
 loadData();
 </script>
 <style scoped>
