@@ -65,6 +65,7 @@ export default {
         console.log(err)
         expireToken(err, this.fnGetList);
       })     
+
     },
 
     fnGetUser: function(){

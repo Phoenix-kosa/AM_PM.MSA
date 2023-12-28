@@ -97,7 +97,12 @@ export default {
         })
         .then((res) => {
           if (res.status == 200){
-            alert("저장되었습니다.")
+            Swal.fire({
+            icon: 'success',
+            title: 'SUCCESS!',
+            text: '저장되었습니다.',
+            confirmButtonText: 'Ok!',
+          });
             this.fnList(res.data.id)
           }
           
@@ -124,7 +129,12 @@ export default {
       } else {
         axios.put(apiUrl, this.form)
         .then((res) => {
-          alert("수정되었습니다.")
+          Swal.fire({
+            icon: 'success',
+            title: 'SUCCESS!',
+            text: '수정되었습니다.',
+            confirmButtonText: 'Ok!',
+          });
           this.fnView(res.data.id)
         }).catch(error => {
           if(error.response.status == 401) {

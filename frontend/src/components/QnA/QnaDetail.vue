@@ -130,20 +130,46 @@ export default{
       })
     },
     fnUpdate(){
-      this.$router.push({
-        path: './write',
-        query: this.requestBody
-      })
+      Swal.fire({
+            icon: 'warning',
+            title: 'Warning!',
+            text: '정말 수정하시겠습니까?',
+            confirmButtonText: 'Ok!',
+            showCancelButton: true,
+            cancelButtonText: 'Cancel!'
+          }).then(result => {
+            if(result.isConfirmed){
+              this.$router.push({
+              path: './write',
+              query: this.requestBody
+              })
+            }
+          })
+
     },
     fnQdelete: function(){
-      if (!confirm("글을 삭제하시겠습니까?")) return
-
-      axios.delete("http://localhost:8088/api/question/"+this.id,{})
-        .then(() => {
-          alert('삭제되었습니다.')
-          this.fnList();
-      }).catch(err => {
-        expireToken(err, this.fnQdelete);
+      Swal.fire({
+            icon: 'warning',
+            title: 'Warning!',
+            text: '정말 삭제하시겠습니까?',
+            confirmButtonText: 'Ok!',
+            showCancelButton: true,
+            cancelButtonText: 'Cancel!'
+          }).then(result => {
+            if(result.isConfirmed){
+              axios.delete("http://localhost:8088/api/question/"+this.id,{})
+                .then(() => {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'SUCCESS!',
+                    text: '삭제되었습니다.',
+                    confirmButtonText: 'ok',
+                  });
+                  this.fnList();
+                }).catch(err => {
+                  expireToken(err, this.fnQdelete);
+              })    
+            }
       })
     },
     fnASave(){
@@ -157,8 +183,12 @@ export default{
 
       axios.post(apiUrl, this.form)
         .then(response => {
-          // if (response.status == 200){
-          alert("저장되었습니다.")
+          Swal.fire({
+            icon: 'success',
+            title: 'SUCCESS!',
+            text: '저장되었습니다.',
+            confirmButtonText: 'Ok!',
+          });
           console.log(response.data);
           this.fnGetQuestion();
           this.$router.push({
@@ -171,17 +201,34 @@ export default{
         })              
     },
     fnAdelete(){
-      if (!confirm("글을 삭제하시겠습니까?")) return
-
-        axios.delete("http://localhost:8088/api/answer/"+this.id)
-        .then(() => {
-          alert('삭제되었습니다.')
-          this.fnGetQuestion();
-          this.$router.push({
-          path: './question',
-          query: this.requestBody
-        })
-      })      
+      Swal.fire({
+            icon: 'warning',
+            title: 'Warning!',
+            text: '정말 삭제하시겠습니까?',
+            confirmButtonText: 'Ok!',
+            showCancelButton: true,
+            cancelButtonText: 'Cancel!'
+          }).then(result => {
+            if(result.isConfirmed){
+              axios.delete("http://localhost:8088/api/answer/"+this.id)
+                .then(() => {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'SUCCESS!',
+                    text: '삭제되었습니다.',
+                    confirmButtonText: 'Ok!',
+                  });
+                  this.fnGetQuestion();
+                  this.$router.push({
+                  path: './question',
+                  query: this.requestBody
+                })
+              })    
+            }
+          }).catch(err => {
+        expireToken(err, this.fnAdelete);
+      })
+        
     },
 
   }  
