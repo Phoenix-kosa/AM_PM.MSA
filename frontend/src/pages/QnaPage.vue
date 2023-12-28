@@ -59,8 +59,8 @@ export default {
         headers: {"Authorization" : sessionStorage.getItem("access-token")}
       }).then((res) => {
         this.list = res.data
-        console.log(list)
-        console.log(list.value)
+        // console.log(list)
+        // console.log(list.value)
       }).catch(err => {
         console.log(err)
         expireToken(err, this.fnGetList);
@@ -79,11 +79,14 @@ export default {
         expireToken(err, this.fnGetUser);
       })
     },
-
     fnView(id){
+      let p = './detail';
+      if(this.roles =='ROLE_ADMIN'){
+        p = "/admin-detail"
+      }
       this.requestBody.id = id
       this.$router.push({
-        path: './detail',
+        path: p,
         query: this.requestBody
       })   
     },

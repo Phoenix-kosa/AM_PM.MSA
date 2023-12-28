@@ -8,4 +8,6 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository<Task, String> {
 
     List<Task> findByProjectId(int projectId);
+
+    boolean deleteAllByProjectId(Integer projectId);
 }

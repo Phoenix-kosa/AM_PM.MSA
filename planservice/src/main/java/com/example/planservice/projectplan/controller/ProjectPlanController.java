@@ -266,4 +266,18 @@ public class ProjectPlanController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/project/{projectId}")
+    public ResponseEntity<?> deleteProjectPlan(@PathVariable("projectId") Integer projectId) {
+        HttpStatus status = HttpStatus.CREATED;
+        try{
+            projectPlanService.deleteProject(projectId);
+        } catch (Exception e) {
+            status=HttpStatus.BAD_REQUEST;
+        }
+
+        return ResponseEntity
+                .status(status)
+                .build();
+    }
+
 }

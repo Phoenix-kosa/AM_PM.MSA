@@ -28,6 +28,7 @@ public class UserService {
         .userId(user.getUserId())
         .password(encoder.encode(user.getPassword()))
         .nickname(user.getNickname())
+        .profileImg("https://phoenixampmbucket.s3.ap-northeast-2.amazonaws.com/defaultprofile.png")
         .email(user.getEmail())
         .roles("ROLE_USER")
         .build();

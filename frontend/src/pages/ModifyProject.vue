@@ -120,6 +120,30 @@ function loadData() {
       expireToken(err, loadData);
     });
 }
+function deletePlan(){
+  axios.delete(`http://localhost:8088/api/plan/project/` + projectId,
+      {
+        headers: { 
+              "Authorization" : sessionStorage.getItem("access-token") 
+          },
+      }).then()
+      .catch(error => {
+        console.log(error)
+      })
+}
+
+function deleteGantt(){
+  axios.delete(`http://localhost:8088/api/task/project/` + projectId,
+      {
+        headers: { 
+              "Authorization" : sessionStorage.getItem("access-token") 
+          },
+      }).then()
+      .catch(error => {
+        console.log(error)
+      })
+}
+
 function deleteProject() {
   Swal.fire({
     icon: 'question',
@@ -137,6 +161,8 @@ function deleteProject() {
           },
       }).then((response) => {
         if(response.status == 205) {
+          deleteGantt();
+          deletePlan();
           Swal.fire({
             icon: 'success',
             title: '삭제되었습니다.',

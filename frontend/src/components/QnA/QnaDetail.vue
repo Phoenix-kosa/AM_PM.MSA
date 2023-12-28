@@ -192,7 +192,7 @@ export default{
           console.log(response.data);
           this.fnGetQuestion();
           this.$router.push({
-          path: './question',
+          path: './admin-question',
           query: this.requestBody
           })
         }).catch(err => {
@@ -211,22 +211,23 @@ export default{
           }).then(result => {
             if(result.isConfirmed){
               axios.delete("http://localhost:8088/api/answer/"+this.id)
-                .then(() => {
+                .then(result => {
+                  console.log(result)
                   Swal.fire({
-                    icon: 'success',
-                    title: 'SUCCESS!',
-                    text: '삭제되었습니다.',
-                    confirmButtonText: 'Ok!',
-                  });
-                  this.fnGetQuestion();
-                  this.$router.push({
-                  path: './question',
-                  query: this.requestBody
-                })
+                      icon: 'success',
+                      title: 'SUCCESS!',
+                      text: '삭제되었습니다.',
+                      confirmButtonText: 'Ok!'
+                    }).then(() =>{
+                        this.$router.push({
+                        path: "/admin-question",
+                        query: this.requestBody
+                      })
+                    });
               })    
             }
           }).catch(err => {
-        expireToken(err, this.fnAdelete);
+            expireToken(err, this.fnAdelete);
       })
         
     },

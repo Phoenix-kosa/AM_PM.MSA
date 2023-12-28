@@ -44,9 +44,9 @@ const index = createRouter({
           component: ProjectPlan,
           props: true 
         },
-
         { path: "question", component: QnaPage },
         { path: "detail", component: QnaDetail },
+        
         { path: "team-chat", component: TeamChat },
         { path: "/chat", component: Chat, name: "Chat" },
         { path: "modify-project", component: ModifyProject },
@@ -62,6 +62,9 @@ const index = createRouter({
       children: [
         { path: "create-project", component: CreateProject },
         { path: "project-list", component: ProjectList },
+        { path: "admin-question", component: QnaPage },
+        { path: "admin-detail", component: QnaDetail },
+        
       ],
     },
     { path: "/login", component: Login },

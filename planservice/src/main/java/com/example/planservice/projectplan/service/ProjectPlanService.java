@@ -4,6 +4,7 @@ import com.example.planservice.global.upload.S3UploadService;
 import com.example.planservice.projectplan.dto.ProjectPlanDTO;
 import com.example.planservice.projectplan.entity.ProjectPlan;
 import com.example.planservice.projectplan.repository.ProjectPlanRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -373,5 +374,16 @@ public class ProjectPlanService {
         dto.setSampleUrl(projectPlan.getSampleUrl());
         dto.setSampleImg(projectPlan.getSampleImg());
         return dto;
+    }
+
+    @Transactional
+    public boolean deleteProject(Integer projectId){
+        try {
+            projectPlanRepository.deleteAllByProjectId(projectId);
+            return true;
+        } catch (Exception e) {
+
+        }
+        return false;
     }
 }
