@@ -29,6 +29,8 @@ import axios from 'axios';
 import { ref } from 'vue';
 import { expireToken } from "../api/config";
 import { useRouter } from 'vue-router';
+import Swal from 'sweetalert2';
+
 const router = useRouter();
 
 const memberList = ref([]);
@@ -58,15 +60,28 @@ const removeMember = () => {
       } , data: {"members":formdata}
     }).then(response => {
       console.log(response.status)
-      alert("맴버를 제거했습니다");
-      window.location.reload();
+      Swal.fire({
+            title: 'Success!',
+            text: '맴버를 제거했습니다!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+        }).then(result => {
+            if(result.value){
+              window.location.reload();
+            }}
+        )
     })
     .catch((err) => {
       console.log(err)
       expireToken(err, removeMember, formdata)
     });
   } else {
-    alert("체크한 유저가 없습니다!");
+    Swal.fire({
+        title: 'Info!',
+        text: '체크한 맴버가 없습니다',
+        icon: 'info',
+        confirmButtonText: 'OK',
+    })
   }
 }
 
