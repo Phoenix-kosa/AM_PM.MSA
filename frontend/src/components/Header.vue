@@ -27,6 +27,7 @@ import { refresh } from "@/api/refresh";
 import { getMyInfoReq } from "../api/common";
 import { expireToken } from "../api/config";
 import { ref, onMounted } from "vue";
+import Swal from 'sweetalert2';
 
 const router = useRouter();
 
@@ -48,9 +49,17 @@ const logout = () => {
         sessionStorage.removeItem("access-token");
         sessionStorage.removeItem("refresh-token");
         sessionStorage.removeItem("projectId");
-        alert("로그아웃 되었습니다.");
-        router.push("/login");
-      }
+        Swal.fire({
+            title: 'Success!',
+            text: '로그아웃 성공!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+        }).then(result => {
+              if(result.value){
+                  router.push("/login")
+              }}
+          )
+        }
     })
     .then((response) => {
       if (response.status == 200) {
