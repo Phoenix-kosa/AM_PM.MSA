@@ -54,7 +54,7 @@ const removeMember = () => {
 
   console.log(formdata)
   if(formdata.length> 0){
-    axios.delete("http://192.168.3.84:8088/api/members/" + projectId, {
+    axios.delete("http://ampm.com:8088/api/members/" + projectId, {
       headers: {
         "Authorization" : sessionStorage.getItem("access-token") 
       } , data: {"members":formdata}
@@ -86,7 +86,7 @@ const removeMember = () => {
 }
 
 function loadData(){
-  axios.get(`http://192.168.3.84:8088/api/members/` + projectId, {
+  axios.get(`http://ampm.com:8088/api/members/` + projectId, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }
@@ -110,7 +110,7 @@ function loadData(){
 }
 
 const getrepResentativeMember = () => {
-  axios.get(`http://192.168.3.84:8088/api/representative_member/` + projectId, {
+  axios.get(`http://ampm.com:8088/api/representative_member/` + projectId, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }

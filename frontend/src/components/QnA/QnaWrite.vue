@@ -58,7 +58,7 @@ export default {
     },
     fnGetView: function(){
       if (this.id !== undefined) {
-        axios.get("http://192.168.3.84:8088/api/question/"+this.id,{
+        axios.get("http://ampm.com:8088/api/question/"+this.id,{
           params: this.requestBody
         }).then((res) => {
         this.title = res.data.title
@@ -83,7 +83,7 @@ export default {
       })
     },
     fnSave(){
-      let apiUrl = "http://192.168.3.84:8088/api/question"
+      let apiUrl = "http://ampm.com:8088/api/question"
       this.form = {
         "id": this.id,
         "title": this.title,
@@ -110,7 +110,7 @@ export default {
           if(error.response.status == 401) {
                 console.log("토큰 만료");
 
-                axios.get("http://192.168.3.84:8088/api/rtoken", {
+                axios.get("http://ampm.com:8088/api/rtoken", {
                     headers: { 
                         "RefreshToken" : sessionStorage.getItem("refresh-token"),
                         "Authorization" : sessionStorage.getItem("access-token") }
@@ -140,7 +140,7 @@ export default {
           if(error.response.status == 401) {
                 console.log("토큰 만료");
 
-                axios.get("http://192.168.3.84:8088/api/rtoken", {
+                axios.get("http://ampm.com:8088/api/rtoken", {
                     headers: { 
                         "RefreshToken" : sessionStorage.getItem("refresh-token"),
                         "Authorization" : sessionStorage.getItem("access-token") }

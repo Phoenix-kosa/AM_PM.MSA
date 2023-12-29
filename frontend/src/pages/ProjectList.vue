@@ -29,7 +29,7 @@ function go(projectId) {
 }
 
 function checkAdmin() {
-  axios.get(`http://192.168.3.84:8088/api/user`, {
+  axios.get(`http://ampm.com:8088/api/user`, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }
@@ -47,7 +47,7 @@ function checkAdmin() {
 }
 
 function loadData() {
-  axios.get(`http://192.168.3.84:8088/api/project`, {
+  axios.get(`http://ampm.com:8088/api/project`, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }

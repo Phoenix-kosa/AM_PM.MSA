@@ -59,7 +59,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
   protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, String atoken, String rtoken) {
 
-    String targetUrl = "http://localhost:5173/oauth2/redirect";
+    String targetUrl = "http://ampm.com:5173/oauth2/redirect";
 
     return UriComponentsBuilder.fromUriString(targetUrl)
         .queryParam("atoken", atoken)

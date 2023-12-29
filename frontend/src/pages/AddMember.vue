@@ -44,7 +44,7 @@ const memberList = () => {
     formdata.push(o);
   }
   console.log("FormData " + formdata);
-  axios.put("http://192.168.3.84:8088/api/members/" + projectId, {"members":formdata}, {
+  axios.put("http://ampm.com:8088/api/members/" + projectId, {"members":formdata}, {
     headers: {
       "Authorization" : sessionStorage.getItem("access-token") 
     }
@@ -70,7 +70,7 @@ const memberList = () => {
 
 const submitForm = () => {
   // console.log(searchMember.value);
-  axios.get(`http://192.168.3.84:8088/api/user/nickname?nickname=${searchMember.value}`)
+  axios.get(`http://ampm.com:8088/api/user/nickname?nickname=${searchMember.value}`)
   .then(request => {
     filteredData.value = [];
     let checkid = [];
@@ -87,7 +87,7 @@ const submitForm = () => {
 }
 
 function loadData(){
-  axios.get(`http://192.168.3.84:8088/api/members/` + projectId, {
+  axios.get(`http://ampm.com:8088/api/members/` + projectId, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }

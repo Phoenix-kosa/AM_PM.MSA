@@ -17,6 +17,7 @@ public class CorsConfig {
       config.addAllowedOrigin("http://localhost:5173"); // e.g. http://domain1.com
       config.addAllowedOrigin("http://localhost:8001");
       config.addAllowedOrigin("http://192.168.3.84:5173");
+      config.addAllowedOrigin("http://ampm.com:5173");
       config.addAllowedHeader("*");
       config.addExposedHeader("Authorization");
       config.addExposedHeader("RefreshToken");

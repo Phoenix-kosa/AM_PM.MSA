@@ -24,7 +24,7 @@ const projectPlanList = ref([]);
 const projectId = sessionStorage.getItem("projectId");
 
 const loadData = () => {
-  axios.get(`http://192.168.3.84:8088/api/plan/etc-pages/${projectId}`, {
+  axios.get(`http://ampm.com:8088/api/plan/etc-pages/${projectId}`, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }

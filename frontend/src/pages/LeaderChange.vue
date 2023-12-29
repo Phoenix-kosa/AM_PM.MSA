@@ -1,5 +1,5 @@
 <template>
-  <h1 class="">Change Leader</h1>
+  <h2 class="" style="text-align: center;">Change Leader</h2><hr>
   <div class="center">
   <div class="container">
     <div class="list">
@@ -37,8 +37,8 @@ const projectId = sessionStorage.getItem("projectId");
 
 const leaderChange = () => {
   console.log(userform.value)
-  if(userform){
-    axios.put("http://192.168.3.84:8088/api/representative_member/" + projectId, {"members":[userform.value]}, {
+  if(userform.value){
+    axios.put("http://ampm.com:8088/api/representative_member/" + projectId, {"members":[userform.value]}, {
       headers: {
         "Authorization" : sessionStorage.getItem("access-token") 
       }
@@ -70,7 +70,7 @@ const leaderChange = () => {
 }
 
 function loadData(){
-  axios.get(`http://192.168.3.84:8088/api/members/` + projectId, {
+  axios.get(`http://ampm.com:8088/api/members/` + projectId, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }

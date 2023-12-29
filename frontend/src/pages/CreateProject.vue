@@ -48,7 +48,7 @@ function createProject() {
       startDate:startDate.value,
       endDate:endDate.value
     }
-    axios.post(`http://192.168.3.84:8088/api/project`, 
+    axios.post(`http://ampm.com:8088/api/project`, 
     requestProject,
     {
       headers: { 

@@ -60,7 +60,7 @@ function modifyProject() {
         startDate:startDate.value,
         endDate:endDate.value
       }
-      axios.put(`http://192.168.3.84:8088/api/project/` + projectId, 
+      axios.put(`http://ampm.com:8088/api/project/` + projectId, 
       requestProject,
       {
         headers: { 
@@ -103,7 +103,7 @@ function modifyProject() {
   });
 }
 function loadData() {
-  axios.get(`http://192.168.3.84:8088/api/project/` + projectId, 
+  axios.get(`http://ampm.com:8088/api/project/` + projectId, 
     {
       headers: { 
           "Authorization" : sessionStorage.getItem("access-token") 
@@ -121,7 +121,7 @@ function loadData() {
     });
 }
 function deletePlan(){
-  axios.delete(`http://192.168.3.84:8088/api/plan/project/` + projectId,
+  axios.delete(`http://ampm.com:8088/api/plan/project/` + projectId,
       {
         headers: { 
               "Authorization" : sessionStorage.getItem("access-token") 
@@ -133,7 +133,7 @@ function deletePlan(){
 }
 
 function deleteGantt(){
-  axios.delete(`http://192.168.3.84:8088/api/task/project/` + projectId,
+  axios.delete(`http://ampm.com:8088/api/task/project/` + projectId,
       {
         headers: { 
               "Authorization" : sessionStorage.getItem("access-token") 
@@ -154,7 +154,7 @@ function deleteProject() {
     cancelButtonText: '취소'
   }).then((result) => {
     if(result.isConfirmed) {
-      axios.delete(`http://192.168.3.84:8088/api/project/` + projectId,
+      axios.delete(`http://ampm.com:8088/api/project/` + projectId,
       {
         headers: { 
               "Authorization" : sessionStorage.getItem("access-token") 

@@ -54,7 +54,7 @@ export default {
         keyword: this.keyword,
         
       }
-      axios.get("http://192.168.3.84:8088/api/question", {
+      axios.get("http://ampm.com:8088/api/question", {
         params: this.requestBody,
         headers: {"Authorization" : sessionStorage.getItem("access-token")}
       }).then((res) => {
@@ -69,7 +69,7 @@ export default {
     },
 
     fnGetUser: function(){
-      axios.get("http://192.168.3.84:8088/api/user", {headers: { 
+      axios.get("http://ampm.com:8088/api/user", {headers: { 
           "Authorization" : sessionStorage.getItem("access-token") }       
       }).then((res) => {
         console.log(res)

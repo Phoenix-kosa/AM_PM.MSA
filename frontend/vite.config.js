@@ -9,7 +9,7 @@ export default defineConfig({
     vue(),
   ],
   server:{
-    host: '192.168.3.84'
+    host: 'ampm.com'
   },
   resolve: {
     alias: {

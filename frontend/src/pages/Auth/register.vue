@@ -119,7 +119,7 @@ const checkUserId = () => {
         availabilityMessage.value = "아이디를 입력해주세요.";
         return;
     }
-    axios.get(`http://192.168.3.84:8088/api/user/user_id/${user_id}`)
+    axios.get(`http://ampm.com:8088/api/user/user_id/${user_id}`)
         .then(response => {
             if (response.data) {
                 availabilityMessage.value = "사용 가능한 아이디입니다.";
@@ -146,7 +146,7 @@ let checkEmail = () => {
         return;
     }
     
-    axios.get(`http://192.168.3.84:8088/api/user/email/${email}`)
+    axios.get(`http://ampm.com:8088/api/user/email/${email}`)
         .then(response => {
             if (response.data) {
                 emailAvailabilityMessage.value = "사용 가능한 이메일입니다.";
@@ -162,7 +162,7 @@ let checkEmail = () => {
 
 const submitForm = () => {
     if(emailavaliable & idavailable){
-        axios.post('http://192.168.3.84:8088/api/user', formData)
+        axios.post('http://ampm.com:8088/api/user', formData)
         .then(response => {
             console.log('Server Response:', response);
             console.log(response.status==201 )

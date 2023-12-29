@@ -226,7 +226,7 @@ export default {
       const projectId = sessionStorage.getItem("projectId");
       // 데이터가 이미 로드되었는지 확인
       if (this.etcPages.length === 0) {
-        axios.get(`http://192.168.3.84:8088/api/plan/etc-pages/${projectId}`)
+        axios.get(`http://ampm.com:8088/api/plan/etc-pages/${projectId}`)
           .then(response => {
             this.etcPages = response.data;
             console.log("15151515")
@@ -274,7 +274,7 @@ export default {
   /*
   createNewPage(title) {
   const projectId = sessionStorage.getItem("projectId");
-  return axios.post('http://192.168.3.84:8088/api/plan/create-page', {
+  return axios.post('http://ampm.com:8088/api/plan/create-page', {
     title: title,
     projectId: projectId
   }).then(response => {
@@ -318,7 +318,7 @@ const newPageTitle = ref('');
 
 const etcPages = ref([]);
 const loadPages = () => {
-  axios.get(`http://192.168.3.84:8088/api/plan/etc-pages/` + projectId)
+  axios.get(`http://ampm.com:8088/api/plan/etc-pages/` + projectId)
     .then(response => {
       etcPages.value = response.data;
     })
@@ -339,7 +339,7 @@ const handleCreatePage = () => {
 
 const createNewPageAndUpdateSidebar = async (title) => {
   try {
-    const response = await axios.post('http://192.168.3.84:8088/api/plan/create-page', {
+    const response = await axios.post('http://ampm.com:8088/api/plan/create-page', {
       title: title,
       projectId: projectId
     });
@@ -361,7 +361,7 @@ onMounted(loadPages);
 
 let member_list = ref([])
 function loadData(){
-  axios.get(`http://192.168.3.84:8088/api/members/` + projectId, {
+  axios.get(`http://ampm.com:8088/api/members/` + projectId, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }
@@ -377,7 +377,7 @@ function loadData(){
 window.onload = loadData();
 
 function show(userId) {
-  axios.get('http://192.168.3.84:8088/api/user/' + userId, {
+  axios.get('http://ampm.com:8088/api/user/' + userId, {
     headers: { 
         "Authorization" : sessionStorage.getItem("access-token") 
     }
