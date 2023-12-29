@@ -1,0 +1,35 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: gateway-server
+  cloud:
+    gateway:
+      routes:
+        - id: mainservice
+          uri: http://ampm.com:8001
+          predicates:
+            - Path=/api/user, /api/user/**, /api/auth, /api/auth/**, /api/profile_img, /api/chat, /api/members/**, /api/representative_member/**, /api/project/**, /api/notice/**, /api/question/**, /api/answer/**, /oauth2/**
+        - id: ganttchartservice
+          uri: http://ampm.com:8002
+          predicates:
+            - Path=/api/task/**
+        - id: planservice
+          uri: http://ampm.com:8003
+          predicates:
+            - Path=/api/plan/**
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: 'http://ampm.com:5173'
+            allow-credentials: true
+            allowedHeaders: '*'
+            allowedMethods:
+              - PUT
+              - GET
+              - POST
+              - DELETE
+#              - MESSAGE

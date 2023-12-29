@@ -4,7 +4,7 @@ server:
 spring:
   application:
     name: planservice
-    
+
 eureka:
   client:
     register-with-eureka: true

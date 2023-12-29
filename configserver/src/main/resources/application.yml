@@ -1,0 +1,27 @@
+server:
+  port: 9000
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eurekamgr:1234@localhost:8761/eureka
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@github.com:Phoenix-kosa/AM_PM.MSA.git
+          ignoreLocalSshSettings: true
+          private-key: |
+            -----BEGIN EC PRIVATE KEY-----
+            MHcCAQEEIDUHHlkv+SHkhKlbFN5Rt4gSc4IvpOltUwQHcU2tRw5toAoGCCqGSM49
+            AwEHoUQDQgAE+BLlGugwrTTqBg+wAsb7L0jP/jqREe3wEGBo7X/wlWdDj/cAeSX/
+            o2G9K4mAha9ASAeRCuIO6Wp5sf1jnPpq1Q==
+            -----END EC PRIVATE KEY-----
+          searchPaths:
+            - 'config'
