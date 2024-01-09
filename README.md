@@ -1,6 +1,6 @@
 # AM_PM.MSA
-프로젝트 관리 서비스
-AM_PM MSA로 변환
+-프로젝트 관리 서비스
+-AM_PM MSA로 변환
 
 <img src="">
 ## 팀원 소개
